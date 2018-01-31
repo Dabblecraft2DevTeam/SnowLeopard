@@ -10,8 +10,8 @@ import org.bukkit.configuration.serialization.SerializableAs;
 @SerializableAs("SLDataset")
 public class Dataset implements Cloneable, ConfigurationSerializable {
 	/**
-	 * A class storing double arrays and the category of that array, it could be
-	 * serialized and working with SnakeYAML.
+	 * A class only storing double arrays and the category of that array, it is
+	 * serializable and could work with SnakeYAML.
 	 * 
 	 * @author Nova41
 	 * 
