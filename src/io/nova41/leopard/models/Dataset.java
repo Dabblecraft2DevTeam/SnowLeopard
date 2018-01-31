@@ -7,7 +7,7 @@ import java.util.Map;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.configuration.serialization.SerializableAs;
 
-@SerializableAs("LeopardDataset")
+@SerializableAs("SLDataset")
 public class Dataset implements Cloneable, ConfigurationSerializable {
 	/**
 	 * A class storing double arrays and the category of that array, it could be

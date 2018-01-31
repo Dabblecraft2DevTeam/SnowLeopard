@@ -6,12 +6,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.nova41.leopard.models.Dataset;
 import io.nova41.leopard.models.LVQNeuronNetwork;
 
-public class Leopard extends JavaPlugin{
-	
+public class Leopard extends JavaPlugin {
+	static {
+		ConfigurationSerialization.registerClass(Dataset.class, "SLDataset");
+	}
+
+	public void onEnable() {
+		this.getLogger().info("Snowleopard is now enabled.");
+		this.getLogger().info("Check the sources & discussions here: github.com/Nova41/SnowLeopard");
+	}
+
 	// For testing purposes.
 	public static void main(String[] args) {
 		LVQNeuronNetwork lvq = new LVQNeuronNetwork(4, 0.5, 0.95);
@@ -38,13 +48,15 @@ public class Leopard extends JavaPlugin{
 
 		System.out.println("Predicting the category of a new dataset according to the trained neuron network");
 		System.out.println("  Killaura categorized:\t" + lvq.predict(
-				new Double[] { 0.14148080214650174, 0.11398027697664276, 0.23061594367027283, 0.11088762416139893 }).getBestMatched());
+				new Double[] { 0.14148080214650174, 0.11398027697664276, 0.23061594367027283, 0.11088762416139893 })
+				.getBestMatched());
 		System.out.println("  Vanilla categorized:\t" + lvq.predict(
-				new Double[] { 0.20942507828179005, 0.13824867503629082, 0.37103211879730225, 0.1600528048017086 }).getBestMatched());
-		
+				new Double[] { 0.20942507828179005, 0.13824867503629082, 0.37103211879730225, 0.1600528048017086 })
+				.getBestMatched());
+
 		System.out.println("... end ... Snowleopard powered LVQ neuron network ...");
 	}
-	
+
 	// For testing purposes.
 	public static Double[][] readDataset(String path) {
 		try {
@@ -53,7 +65,6 @@ public class Leopard extends JavaPlugin{
 			List<Double[]> datasets = new ArrayList<Double[]>();
 
 			for (String line : file.split("\n")) {
-				//System.out.print("x");
 				List<Double> oneline = new ArrayList<Double>();
 				for (String feature : line.split(" ")) {
 					features = line.split(" ").length;
