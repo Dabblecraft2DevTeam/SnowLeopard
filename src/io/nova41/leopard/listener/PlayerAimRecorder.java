@@ -1,29 +1,31 @@
 package io.nova41.leopard.listener;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
-import org.encanta.mc.ac.AimDataManager;
-import org.encanta.mc.ac.AimDataSeries;
 
-public class PlayerAimListener implements Listener {
-	private List<String> listenedPlayer;
+import io.nova41.leopard.models.PlayerAimData;
 
-	public PlayerAimListener() {
-		this.listenedPlayer = new ArrayList<String>();
+public class PlayerAimRecorder implements Listener {
+	private Map<String, PlayerAimData> listenedPlayer;
+
+	public PlayerAimRecorder(JavaPlugin plugin) {
+		this.listenedPlayer = new HashMap<String, PlayerAimData>();
 	}
-
+	
+	
 	@EventHandler
 	public void onPlayerHit(EntityDamageByEntityEvent e) {
 		if (!(e.getEntity() instanceof Player))
 			return;
-		if (!listenedPlayer.contains(e.getEntity().getName()))
+		if (!listenedPlayer.containsKey(e.getEntity().getName()))
 			return;
 		Player player = (Player) e.getEntity();
 		Entity entity = e.getDamager();
