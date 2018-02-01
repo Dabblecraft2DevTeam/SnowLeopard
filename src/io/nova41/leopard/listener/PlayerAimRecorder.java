@@ -23,7 +23,7 @@ public class PlayerAimRecorder implements Listener {
 	
 	
 	@EventHandler
-	public void onPlayerHit(EntityDamageByEntityEvent e) {
+	protected void onPlayerHit(EntityDamageByEntityEvent e) {
 		if (!(e.getEntity() instanceof Player))
 			return;
 		if (!listenedPlayer.containsKey(e.getEntity().getName()))
@@ -47,11 +47,13 @@ public class PlayerAimRecorder implements Listener {
 
 	public void setListen(String playername, boolean listen) {
 		if (listen)
-			if (listenedPlayer.contains(playername))
+			if (listenedPlayer.containsKey(playername))
 				return;
 			else
-				listenedPlayer.add(playername);
+				listenedPlayer.put(playername, new PlayerAimData());
 		else
 			listenedPlayer.remove(playername);
 	}
+	
+	
 }

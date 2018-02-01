@@ -22,6 +22,7 @@ public class Leopard extends JavaPlugin {
 	
 	public void onEnable() {
 		this.aimRecorder = new PlayerAimRecorder(this);
+		this.aimRecorder.setListen("Unity41", true);
 		this.getLogger().info("Snowleopard is now enabled.");
 		this.getLogger().info("Check the sources & discussions here: github.com/Nova41/SnowLeopard");
 	}
