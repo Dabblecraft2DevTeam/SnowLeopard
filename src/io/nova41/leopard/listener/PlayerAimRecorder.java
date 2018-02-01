@@ -23,7 +23,7 @@ public class PlayerAimRecorder implements Listener {
 
 	@EventHandler
 	protected void onPlayerHit(EntityDamageByEntityEvent e) {
-		if (!(e.getEntity() instanceof Player))
+		if (!(e.getDamager() instanceof Player))
 			return;
 		if (!listenedPlayer.containsKey(e.getEntity().getName()))
 			return;
