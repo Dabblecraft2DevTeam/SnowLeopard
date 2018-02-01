@@ -32,7 +32,7 @@ public class PlayerAimListener implements Listener {
 		Vector entityLoc = entity.getLocation().toVector();
 		Vector playerEntityVec = entityLoc.subtract(playerEyeLoc);
 		float angle = playerLookDir.angle(playerEntityVec);
-
+		System.out.println(angle);
 	}
 	
 	/**

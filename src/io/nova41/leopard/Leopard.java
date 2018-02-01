@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.nova41.leopard.listener.PlayerAimListener;
 import io.nova41.leopard.models.Dataset;
 import io.nova41.leopard.models.LVQNeuronNetwork;
 
@@ -18,6 +19,7 @@ public class Leopard extends JavaPlugin {
 	}
 
 	public void onEnable() {
+		this.getServer().getPluginManager().registerEvents(new PlayerAimListener(), this);
 		this.getLogger().info("Snowleopard is now enabled.");
 		this.getLogger().info("Check the sources & discussions here: github.com/Nova41/SnowLeopard");
 	}
