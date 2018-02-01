@@ -18,8 +18,10 @@ public class Leopard extends JavaPlugin {
 		ConfigurationSerialization.registerClass(Dataset.class, "SLDataset");
 	}
 
+	private PlayerAimRecorder aimRecorder;
+	
 	public void onEnable() {
-		this.getServer().getPluginManager().registerEvents(new PlayerAimRecorder(), this);
+		this.aimRecorder = new PlayerAimRecorder(this);
 		this.getLogger().info("Snowleopard is now enabled.");
 		this.getLogger().info("Check the sources & discussions here: github.com/Nova41/SnowLeopard");
 	}

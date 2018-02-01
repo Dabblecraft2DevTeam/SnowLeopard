@@ -17,6 +17,7 @@ public class PlayerAimRecorder implements Listener {
 	private Map<String, PlayerAimData> listenedPlayer;
 
 	public PlayerAimRecorder(JavaPlugin plugin) {
+		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 		this.listenedPlayer = new HashMap<String, PlayerAimData>();
 	}
 	
