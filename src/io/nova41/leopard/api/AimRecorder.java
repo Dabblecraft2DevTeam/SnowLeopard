@@ -22,8 +22,10 @@ public class AimRecorder {
 
 	/**
 	 * If listen = true, new aim data will be constantly written to
-	 * corresponding PlayerAimData
+	 * corresponding PlayerAimData.
 	 * 
+	 * @param playername
+	 * @param listen
 	 */
 	public void setListen(String playername, boolean listen) {
 		if (Bukkit.getPlayer(playername) == null)
