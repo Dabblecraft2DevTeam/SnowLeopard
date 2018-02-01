@@ -20,8 +20,7 @@ public class PlayerAimRecorder implements Listener {
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 		this.listenedPlayer = new HashMap<String, PlayerAimData>();
 	}
-	
-	
+
 	@EventHandler
 	protected void onPlayerHit(EntityDamageByEntityEvent e) {
 		if (!(e.getEntity() instanceof Player))
@@ -37,7 +36,7 @@ public class PlayerAimRecorder implements Listener {
 		float angle = playerLookDir.angle(playerEntityVec);
 		System.out.println(angle);
 	}
-	
+
 	/**
 	 * Tell the listener whether the player's aim data should be collected.
 	 * 
@@ -54,6 +53,9 @@ public class PlayerAimRecorder implements Listener {
 		else
 			listenedPlayer.remove(playername);
 	}
-	
-	
+
+	public PlayerAimData getData(String playername) {
+		return this.listenedPlayer.get(playername);
+	}
+
 }
