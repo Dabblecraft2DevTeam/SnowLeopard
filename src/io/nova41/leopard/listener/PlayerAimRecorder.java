@@ -11,24 +11,30 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-import io.nova41.leopard.models.PlayerAimData;
+import io.nova41.leopard.models.AimData;
+import io.nova41.leopard.models.AimDataContainer;
 
 public class PlayerAimRecorder implements Listener {
-	private Map<String, PlayerAimData> listenedPlayer;
+	private Map<String, AimData> listenedPlayer;
 
-	public PlayerAimRecorder(JavaPlugin plugin) {
+	private JavaPlugin plugin;
+	private AimDataContainer dataContainer;
+	
+	public PlayerAimRecorder(JavaPlugin plugin, AimDataContainer container) {
+		this.plugin = plugin;
+		this.dataContainer = container;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
-		this.listenedPlayer = new HashMap<String, PlayerAimData>();
+		this.listenedPlayer = new HashMap<String, AimData>();
 	}
 
 	@EventHandler
 	protected void onPlayerHit(EntityDamageByEntityEvent e) {
 		if (!(e.getDamager() instanceof Player))
 			return;
-		if (!listenedPlayer.containsKey(e.getEntity().getName()))
+		if (!listenedPlayer.containsKey(e.getDamager().getName()))
 			return;
-		Player player = (Player) e.getEntity();
-		Entity entity = e.getDamager();
+		Player player = (Player) e.getDamager();
+		Entity entity = e.getEntity();
 		Vector playerLookDir = player.getEyeLocation().getDirection();
 		Vector playerEyeLoc = player.getEyeLocation().toVector();
 		Vector entityLoc = entity.getLocation().toVector();
@@ -43,18 +49,18 @@ public class PlayerAimRecorder implements Listener {
 	 * @param playername
 	 * @param listen
 	 */
-
+	
 	public void setListen(String playername, boolean listen) {
 		if (listen)
 			if (listenedPlayer.containsKey(playername))
 				return;
 			else
-				listenedPlayer.put(playername, new PlayerAimData());
+				listenedPlayer.put(playername, new AimData());
 		else
 			listenedPlayer.remove(playername);
 	}
 
-	public PlayerAimData getData(String playername) {
+	public AimData getData(String playername) {
 		return this.listenedPlayer.get(playername);
 	}
 
