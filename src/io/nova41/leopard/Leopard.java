@@ -10,6 +10,7 @@ import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import io.nova41.leopard.listener.PlayerAimRecorder;
+import io.nova41.leopard.models.AimDataContainer;
 import io.nova41.leopard.models.Dataset;
 import io.nova41.leopard.models.LVQNeuronNetwork;
 
@@ -22,7 +23,7 @@ public class Leopard extends JavaPlugin {
 	
 	public void onEnable() {
 		this.aimRecorder = new PlayerAimRecorder((JavaPlugin) this);
-		this.aimRecorder.setListen("Unity41", true);
+		this.aimRecorder.setListen("Unity41", new AimDataContainer());
 		this.getLogger().info("Snowleopard is now enabled.");
 		this.getLogger().info("Check the sources & discussions here: github.com/Nova41/SnowLeopard");
 	}
