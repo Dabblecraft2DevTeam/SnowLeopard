@@ -24,11 +24,9 @@ public class PlayerAimRecorder implements Listener {
 	private Map<String, SequenceContainer> listenedPlayer;
 
 	private JavaPlugin plugin;
-	private SequenceContainer dataContainer;
 	
-	public PlayerAimRecorder(JavaPlugin plugin, SequenceContainer container) {
+	public PlayerAimRecorder(JavaPlugin plugin) {
 		this.plugin = plugin;
-		this.dataContainer = container;
 		plugin.getServer().getPluginManager().registerEvents(this, plugin);
 		this.listenedPlayer = new HashMap<String, SequenceContainer>();
 	}
@@ -49,32 +47,16 @@ public class PlayerAimRecorder implements Listener {
 		System.out.println(angle);
 	}
 
-	/**
-	 * Tell the listener whether the player's aim data should be collected.
-	 * 
-	 * @param playername
-	 * @param listen
-	 */
-	
-	public void setListen(String playername, boolean listen) {
-		if (listen)
-			if (listenedPlayer.containsKey(playername))
-				return;
-			else
-				listenedPlayer.put(playername, new SequenceContainer());
-		else
-			listenedPlayer.remove(playername);
+	public void setListen(String playername, SequenceContainer containerOfPlayer) {
+		this.listenedPlayer.put(playername, containerOfPlayer);
 	}
 	
-	/**
-	 * Get the recorded aim data 
-	 * 
-	 * @param playername
-	 * @return
-	 */
-
-	public AimDataContainer getData(String playername) {
+	public void stopListen(String playername) {
+		this.listenedPlayer.remove(playername);
+	}
+	
+	public SequenceContainer getData(String playername) {
 		return this.listenedPlayer.get(playername);
 	}
-
+	
 }
