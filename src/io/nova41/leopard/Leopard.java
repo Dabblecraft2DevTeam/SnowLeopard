@@ -33,11 +33,11 @@ public class Leopard extends JavaPlugin {
 
 		Double[][] train_killaura = readDataset("E:/Killaura");
 		for (Double[] line : train_killaura) {
-			lvq.input("killaura", line);
+			lvq.input(new Dataset("killaura", line));
 		}
 		Double[][] train_vanilla = readDataset("E:/Vanilla");
 		for (Double[] line : train_vanilla) {
-			lvq.input("vanilla", line);
+			lvq.input(new Dataset("vanilla", line));
 		}
 		lvq.print_inputlayers();
 
