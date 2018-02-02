@@ -1,6 +1,6 @@
 # Snow Leopard
 
-Snow leopard is a open-source lightweight analyzer categorizes player's behaviour in Minecraft. The main use of it is to detect whether one is using killaura. 
+Snow leopard is an open-source lightweight analyzer categorizes player's behaviour in Minecraft. The main use of it is to detect whether one is using killaura. 
 Welcome to contribute to the project! You can provide improvements by [making a new pull request].
 
 [making a new pull request]: <https://github.com/Nova41/SnowLeopard/pull/new/master>
@@ -9,6 +9,7 @@ Welcome to contribute to the project! You can provide improvements by [making a 
 
   - LVQ neuron network with dataset adaptation
   - Flexible dataset processing system
+  - Low coupling: Open Interface for Developers
   - Categorized datasets for data analysis
   - Serializable datasets adapted SnakeYAML
   - Built-in Banwave system
