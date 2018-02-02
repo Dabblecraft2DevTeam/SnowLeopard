@@ -2,6 +2,7 @@ package io.nova41.leopard.listener;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -11,7 +12,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.util.Vector;
 
-import io.nova41.leopard.models.AimDataContainer;
 import io.nova41.leopard.models.SequenceContainer;
 
 public class PlayerAimRecorder implements Listener {
@@ -44,6 +44,7 @@ public class PlayerAimRecorder implements Listener {
 		Vector entityLoc = entity.getLocation().toVector();
 		Vector playerEntityVec = entityLoc.subtract(playerEyeLoc);
 		float angle = playerLookDir.angle(playerEntityVec);
+		this.listenedPlayer.get(e.getDamager().getName()).add(angle);
 		System.out.println(angle);
 	}
 
@@ -53,6 +54,10 @@ public class PlayerAimRecorder implements Listener {
 	
 	public void stopListen(String playername) {
 		this.listenedPlayer.remove(playername);
+	}
+	
+	public Set<String> getListeningPlayers() {
+		return this.listenedPlayer.keySet();
 	}
 	
 	public SequenceContainer getData(String playername) {
