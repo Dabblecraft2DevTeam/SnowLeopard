@@ -37,6 +37,7 @@ public class LVQNeuronNetwork {
 	 * @author Nova41
 	 * 
 	 */
+
 	private List<Dataset> input_layer;
 	private List<Dataset> output_layer;
 	private Map<Double, Dataset> distances;
@@ -121,6 +122,7 @@ public class LVQNeuronNetwork {
 		return result;
 	}
 
+	@Deprecated
 	public void input(String category, Double[] data) {
 		this.input_layer.add(new Dataset(category, data));
 	}
