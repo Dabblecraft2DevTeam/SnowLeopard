@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.fusesource.jansi.Ansi;
 
 public class CommandManager implements CommandExecutor {
 
@@ -46,20 +47,24 @@ public class CommandManager implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
-		if (args.length == 0)
+		if (args.length == 0) {
 			if (usageCommand != null)
 				this.usageCommand.perform(sender, args);
-			else if (commands.containsKey(cmd.getName().toLowerCase())) {
-				LeopardCommand executor = commands.get(cmd.getName().toLowerCase());
+		} else {
+			String subcommand = args[0];
+			if (commands.containsKey(subcommand.toLowerCase())) {
+				LeopardCommand executor = commands.get(subcommand.toLowerCase());
 				if (sender instanceof Player)
 					executor.perform(sender, args);
-				else 
-					if (executor.isPlayerOnly() == false && errorCommand != null)
-						errorCommand.perform(sender, args);
-					else
-						return false;
-				return true;
+				else if (executor.isPlayerOnly() == false)
+					executor.perform(sender, args);
+				else if (errorCommand != null)
+					errorCommand.perform(sender, args);
+				else
+					return false;
 			}
+			return true;
+		}
 		if (usageCommand != null) {
 			usageCommand.perform(sender, args);
 			return true;
