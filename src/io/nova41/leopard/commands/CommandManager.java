@@ -46,19 +46,20 @@ public class CommandManager implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
-		if (args.length == 0 && usageCommand != null)
-			this.usageCommand.perform(sender, args);
-		else if (commands.containsKey(cmd.getName().toLowerCase())) {
-			LeopardCommand executor = commands.get(cmd.getName().toLowerCase());
-			if (sender instanceof Player)
-				executor.perform(sender, args);
-			else if (executor.isPlayerOnly() == false)
-				if (errorCommand != null)
-					errorCommand.perform(sender, args);
-				else
-					return false;
-			return true;
-		}
+		if (args.length == 0)
+			if (usageCommand != null)
+				this.usageCommand.perform(sender, args);
+			else if (commands.containsKey(cmd.getName().toLowerCase())) {
+				LeopardCommand executor = commands.get(cmd.getName().toLowerCase());
+				if (sender instanceof Player)
+					executor.perform(sender, args);
+				else 
+					if (executor.isPlayerOnly() == false && errorCommand != null)
+						errorCommand.perform(sender, args);
+					else
+						return false;
+				return true;
+			}
 		if (usageCommand != null) {
 			usageCommand.perform(sender, args);
 			return true;
