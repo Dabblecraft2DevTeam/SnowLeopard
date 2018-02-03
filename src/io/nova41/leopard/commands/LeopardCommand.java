@@ -3,6 +3,8 @@ package io.nova41.leopard.commands;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.nova41.leopard.file.LocaleManager;
+
 public abstract class LeopardCommand {
 	
 	protected boolean playerOnly;
@@ -15,5 +17,5 @@ public abstract class LeopardCommand {
 		return this.playerOnly;
 	}
 
-	public abstract void perform(JavaPlugin plugin, CommandSender sender, String[] args);
+	public abstract void perform(LocaleManager locale, CommandSender sender, String[] args);
 }

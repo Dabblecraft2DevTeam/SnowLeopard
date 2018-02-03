@@ -1,9 +1,9 @@
 package io.nova41.leopard.commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import io.nova41.leopard.Leopard;
+import io.nova41.leopard.file.LocaleManager;
 
 public class CommandVersion extends LeopardCommand {
 
@@ -12,8 +12,8 @@ public class CommandVersion extends LeopardCommand {
 	}
 
 	@Override
-	public void perform(JavaPlugin plugin, CommandSender sender, String[] args) {
-		sender.sendMessage(Leopard.getVersion());
+	public void perform(LocaleManager locale, CommandSender sender, String[] args) {
+		locale.sendMessage(sender, "leopard.command.version", Leopard.getVersion());
 	}
 
 }

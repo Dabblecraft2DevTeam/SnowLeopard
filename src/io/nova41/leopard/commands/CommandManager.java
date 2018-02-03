@@ -9,12 +9,15 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import io.nova41.leopard.file.LocaleManager;
+
 public class CommandManager implements CommandExecutor {
 
 	private JavaPlugin plugin;
-	
+
 	private LeopardCommand errorCommand;
 	private LeopardCommand usageCommand;
+	private LocaleManager locales;
 	private Map<String, LeopardCommand> commands;
 
 	/**
@@ -47,28 +50,32 @@ public class CommandManager implements CommandExecutor {
 		this.commands.put(name.toLowerCase(), executor);
 	}
 
+	public void setLocale(LocaleManager locales) {
+		this.locales = locales;
+	}
+
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 		if (args.length == 0) {
 			if (usageCommand != null)
-				this.usageCommand.perform(plugin, sender, args);
+				this.usageCommand.perform(locales, sender, args);
 		} else {
 			String subcommand = args[0];
 			if (commands.containsKey(subcommand.toLowerCase())) {
 				LeopardCommand executor = commands.get(subcommand.toLowerCase());
 				if (sender instanceof Player)
-					executor.perform(plugin, sender, args);
+					executor.perform(locales, sender, args);
 				else if (executor.isPlayerOnly() == false)
-					executor.perform(plugin, sender, args);
+					executor.perform(locales, sender, args);
 				else if (errorCommand != null)
-					errorCommand.perform(plugin, sender, args);
+					errorCommand.perform(locales, sender, args);
 				else
 					return false;
 			}
 			return true;
 		}
 		if (usageCommand != null) {
-			usageCommand.perform(plugin, sender, args);
+			usageCommand.perform(locales, sender, args);
 			return true;
 		}
 		return false;

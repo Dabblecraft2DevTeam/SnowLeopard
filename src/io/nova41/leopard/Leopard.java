@@ -28,9 +28,10 @@ public class Leopard extends JavaPlugin {
 	private LocaleManager localeManager;
 
 	public void onEnable() {
-		DataFolderIniter folderIniter = new DataFolderIniter(this);
-		folderIniter.makeFolder(Arrays.asList("category", "locales", "database"));
 		try {
+			DataFolderIniter folderIniter = new DataFolderIniter(this);
+			folderIniter.makeFolder(Arrays.asList("category", "locales", "database"));
+			folderIniter.releaseFile("en-US.yml", "locales\\en-US.yml", false);
 			this.localeManager = new LocaleManager(this, "locales");
 		} catch (NullPointerException | IOException | InvalidConfigurationException e) {
 			e.printStackTrace();
@@ -40,7 +41,9 @@ public class Leopard extends JavaPlugin {
 			this.getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
+		this.getLogger().info("Loaded " + localeManager.getLoadedLocales() + " locale(s)");
 		this.commandManager = new CommandManager(this, "sl");
+		this.commandManager.setLocale(localeManager);
 		this.commandManager.registerCommand("serverinfo", new CommandServerInfo(true));
 		this.commandManager.registerCommand("version", new CommandVersion(false));
 		this.getLogger().info("Snowleopard is now enabled.");

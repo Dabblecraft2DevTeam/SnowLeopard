@@ -9,50 +9,57 @@ import org.apache.commons.io.FileUtils;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class DataFolderIniter {
-	
+
 	/**
 	 * DataFolderIniter
 	 * 
 	 * @author Nova41
 	 */
-	
+
 	private JavaPlugin plugin;
 
 	public DataFolderIniter(JavaPlugin plugin) {
 		this.plugin = plugin;
 	}
-	
+
 	/**
-	 * Create the dictionary by the given name.
-	 * Useful when the plugin is called for the first time.
+	 * Create the dictionary by the given name. Useful when the plugin is called
+	 * for the first time.
+	 * 
 	 * @param name
 	 */
 	public void makeFolder(String name) {
 		File folderToMake = new File(plugin.getDataFolder(), name);
 		folderToMake.mkdirs();
 	}
-	
+
 	/**
-	 * Create the dictionary by the given name.
-	 * Useful when the plugin is called for the first time.
+	 * Create the dictionary by the given name. Useful when the plugin is called
+	 * for the first time.
+	 * 
 	 * @param names
 	 */
-	
+
 	public void makeFolder(List<String> names) {
 		for (String folder : names)
 			makeFolder(folder);
 	}
-	
+
 	/**
 	 * Release specific resource file to the target folder
 	 * 
 	 * @param resource
 	 * @param path
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public void releaseFile(String resource, String path) throws IOException {
+	public void releaseFile(String resource, String path, boolean override) throws IOException {
 		InputStream resourceStream = plugin.getResource(resource);
 		File resourceFile = new File(plugin.getDataFolder(), path);
-		FileUtils.copyInputStreamToFile(resourceStream, resourceFile);
+		if (!resourceFile.exists()) {	
+			resourceFile.createNewFile();
+			FileUtils.copyInputStreamToFile(resourceStream, resourceFile);
+		} else if (override && resourceFile.exists()) {
+			FileUtils.copyInputStreamToFile(resourceStream, resourceFile);
+		}
 	}
 }

@@ -7,9 +7,11 @@ import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import net.md_5.bungee.api.ChatColor;
 
 public class LocaleManager {
 
@@ -24,7 +26,8 @@ public class LocaleManager {
 		// Read all configs from the message folder
 		File messageFolder = new File(plugin.getDataFolder(), message_folder_name);
 		for (File messageFile : messageFolder.listFiles()) {
-			ConfigFile messageConfig = new ConfigFile(plugin, messageFile.getName());
+			ConfigFile messageConfig = new ConfigFile(plugin,
+					message_folder_name + File.separator + messageFile.getName());
 			messageFiles.put(messageConfig.getConfig().getString("locale.name"), messageConfig);
 		}
 	}
@@ -33,9 +36,9 @@ public class LocaleManager {
 		return this.messageFiles.size();
 	}
 
-	public void sendMessage(Player player, String path, Object... arg) {
+	public void sendMessage(CommandSender sender, String path, Object... arg) {
 		String message = MessageFormat.format(messageFiles.get("en-US").getConfig().getString(path), arg);
-		player.sendMessage(message);
+		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 	}
 
 }
