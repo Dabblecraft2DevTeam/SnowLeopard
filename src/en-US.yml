@@ -1,0 +1,6 @@
+locale:
+    name: 'en-US'
+leopard.command.version: &aThe server is running SnowLeopard &e{0}
+leopard.command.serverinfo: |
+    &aServer version: &e{0}
+    &aServer TPS: &e{1}
