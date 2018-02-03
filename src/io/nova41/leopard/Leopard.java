@@ -16,9 +16,12 @@ import io.nova41.leopard.models.Dataset;
 import io.nova41.leopard.models.LVQNeuronNetwork;
 
 public class Leopard extends JavaPlugin {
+	
 	static {
-		ConfigurationSerialization.registerClass(Dataset.class, "SLDataset");
+		ConfigurationSerialization.registerClass(Dataset.class, "Dataset");
 	}
+	
+	private static final String VERSION = "1.0.0-DEV";
 
 	private PlayerAimRecorder aimRecorder;
 	private CommandManager commandManager;
@@ -32,6 +35,10 @@ public class Leopard extends JavaPlugin {
 		this.getLogger().info("Check the sources & discussions here: github.com/Nova41/SnowLeopard");
 	}
 
+	public static String getVersion() {
+		return VERSION;
+	}
+	
 	// For testing purposes.
 	public static void main(String[] args) {
 		LVQNeuronNetwork lvq = new LVQNeuronNetwork(4, 0.5, 0.95);

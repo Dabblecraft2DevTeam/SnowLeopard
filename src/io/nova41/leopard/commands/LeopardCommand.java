@@ -1,6 +1,7 @@
 package io.nova41.leopard.commands;
 
 import org.bukkit.command.CommandSender;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public abstract class LeopardCommand {
 	
@@ -14,5 +15,5 @@ public abstract class LeopardCommand {
 		return this.playerOnly;
 	}
 
-	public abstract void perform(CommandSender sender, String[] args);
+	public abstract void perform(JavaPlugin plugin, CommandSender sender, String[] args);
 }

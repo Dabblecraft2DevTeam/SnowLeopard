@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class CommandManager implements CommandExecutor {
 
+	private JavaPlugin plugin;
+	
 	private LeopardCommand errorCommand;
 	private LeopardCommand usageCommand;
 	private Map<String, LeopardCommand> commands;
@@ -22,6 +24,7 @@ public class CommandManager implements CommandExecutor {
 	 * @param baseCommand
 	 */
 	public CommandManager(JavaPlugin plugin, String baseCommand) {
+		this.plugin = plugin;
 		plugin.getCommand(baseCommand).setExecutor(this);
 		this.commands = new HashMap<String, LeopardCommand>();
 	}
@@ -48,24 +51,24 @@ public class CommandManager implements CommandExecutor {
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 		if (args.length == 0) {
 			if (usageCommand != null)
-				this.usageCommand.perform(sender, args);
+				this.usageCommand.perform(plugin, sender, args);
 		} else {
 			String subcommand = args[0];
 			if (commands.containsKey(subcommand.toLowerCase())) {
 				LeopardCommand executor = commands.get(subcommand.toLowerCase());
 				if (sender instanceof Player)
-					executor.perform(sender, args);
+					executor.perform(plugin, sender, args);
 				else if (executor.isPlayerOnly() == false)
-					executor.perform(sender, args);
+					executor.perform(plugin, sender, args);
 				else if (errorCommand != null)
-					errorCommand.perform(sender, args);
+					errorCommand.perform(plugin, sender, args);
 				else
 					return false;
 			}
 			return true;
 		}
 		if (usageCommand != null) {
-			usageCommand.perform(sender, args);
+			usageCommand.perform(plugin, sender, args);
 			return true;
 		}
 		return false;
