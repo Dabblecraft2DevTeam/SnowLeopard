@@ -8,3 +8,4 @@ leopard.command.serverinfo: |
     &aServer version: &e{0}
     &aServer TPS: &e{1}
     &aYour ping: &e{2}
+leopard.command.serverinfo.fail: '&cFailed to dump the information. Check the console for more details.'

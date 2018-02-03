@@ -40,5 +40,9 @@ public class LocaleManager {
 		String message = MessageFormat.format(messageFiles.get("en-US").getConfig().getString(path), arg);
 		sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
 	}
+	
+	public JavaPlugin getPlugin() {
+		return this.plugin;
+	}
 
 }
