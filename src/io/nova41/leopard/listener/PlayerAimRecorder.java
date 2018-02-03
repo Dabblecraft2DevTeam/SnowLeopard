@@ -39,13 +39,7 @@ public class PlayerAimRecorder implements Listener {
 			return;
 		Player player = (Player) e.getDamager();
 		Entity entity = e.getEntity();
-		Vector playerLookDir = player.getEyeLocation().getDirection();
-		Vector playerEyeLoc = player.getEyeLocation().toVector();
-		Vector entityLoc = entity.getLocation().toVector();
-		Vector playerEntityVec = entityLoc.subtract(playerEyeLoc);
-		float angle = playerLookDir.angle(playerEntityVec);
-		this.listenedPlayer.get(e.getDamager().getName()).add(angle);
-		System.out.println(angle);
+		this.listenedPlayer.get(e.getDamager().getName()).input(player, entity);
 	}
 
 	public void setListen(String playername, SequenceContainer containerOfPlayer) {

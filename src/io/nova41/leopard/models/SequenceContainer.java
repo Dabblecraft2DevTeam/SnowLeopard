@@ -3,15 +3,16 @@ package io.nova41.leopard.models;
 import java.util.Iterator;
 import java.util.List;
 
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Player;
+
 public abstract class SequenceContainer {
 
 	protected List<Float> angleSequence;
 
 	public abstract Dataset toVector(String category);
 
-	public void add(Float angle) {
-		this.angleSequence.add(angle);
-	}
+	public abstract void input(Player player, Entity enemy);
 
 	protected double mean(List<Float> list) {
 		double sum = 0;
