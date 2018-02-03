@@ -1,6 +1,10 @@
 locale:
     name: 'en-US'
+leopard.command.help: |
+    &e/sl serverinfo &fGet information about the server.
+    &e/sl version &fGet the version of current SnowLeopard build.
 leopard.command.version: &aThe server is running SnowLeopard &e{0}
 leopard.command.serverinfo: |
     &aServer version: &e{0}
     &aServer TPS: &e{1}
+    &aYour ping: &e{2}

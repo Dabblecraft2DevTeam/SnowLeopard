@@ -3,10 +3,12 @@ package io.nova41.leopard.file;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class LocaleManager {
@@ -26,8 +28,14 @@ public class LocaleManager {
 			messageFiles.put(messageConfig.getConfig().getString("locale.name"), messageConfig);
 		}
 	}
-	
+
 	public int getLoadedLocales() {
 		return this.messageFiles.size();
 	}
+
+	public void sendMessage(Player player, String path, Object... arg) {
+		String message = MessageFormat.format(messageFiles.get("en-US").getConfig().getString(path), arg);
+		player.sendMessage(message);
+	}
+
 }
