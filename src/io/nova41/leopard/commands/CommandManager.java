@@ -52,10 +52,11 @@ public class CommandManager implements CommandExecutor {
 			LeopardCommand executor = commands.get(cmd.getName().toLowerCase());
 			if (sender instanceof Player)
 				executor.perform(sender, args);
-			else if (errorCommand != null)
-				errorCommand.perform(sender, args);
-			else 
-				return false;
+			else if (executor.isPlayerOnly() == false)
+				if (errorCommand != null)
+					errorCommand.perform(sender, args);
+				else
+					return false;
 			return true;
 		}
 		if (usageCommand != null) {
