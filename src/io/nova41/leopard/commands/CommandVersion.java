@@ -15,8 +15,7 @@ public class CommandVersion extends LeopardCommand {
 
 	@Override
 	public void perform(CommandSender sender, String[] args) {
-		// TODO Auto-generated method stub
-
+		sender.sendMessage("1.0.0");
 	}
 
 }
