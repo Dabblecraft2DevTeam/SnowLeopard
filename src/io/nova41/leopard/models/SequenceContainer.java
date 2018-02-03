@@ -5,9 +5,9 @@ import java.util.List;
 
 public abstract class SequenceContainer {
 
-	private List<Float> angleSequence;
+	protected List<Float> angleSequence;
 
-	public abstract Dataset toVector();
+	public abstract Dataset toVector(String category);
 
 	public void add(Float angle) {
 		this.angleSequence.add(angle);
