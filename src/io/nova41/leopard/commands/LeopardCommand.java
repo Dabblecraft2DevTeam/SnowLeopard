@@ -2,8 +2,17 @@ package io.nova41.leopard.commands;
 
 import org.bukkit.command.CommandSender;
 
-public interface LeopardCommand {
-	public boolean isPlayerOnly();
+public abstract class LeopardCommand {
+	
+	protected boolean playerOnly;
+	
+	public LeopardCommand(boolean isPlayerOnly) {
+		this.playerOnly = isPlayerOnly;
+	}
+	
+	public boolean isPlayerOnly() {
+		return this.playerOnly;
+	}
 
-	public void perform(CommandSender sender, String[] args);
+	public abstract void perform(CommandSender sender, String[] args);
 }
