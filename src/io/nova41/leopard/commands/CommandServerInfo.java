@@ -43,6 +43,19 @@ public class CommandServerInfo extends LeopardCommand {
 		return String.valueOf(averageTps).substring(0, 8);
 	}
 	
+	/**
+	 * In fact it returns p.getHandle().playerConnection.player.ping;
+	 * 
+	 * @param player
+	 * @return
+	 * @throws NoSuchFieldException
+	 * @throws SecurityException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 * @throws NoSuchMethodException
+	 */
+	
 	int playerPing(Player player) throws NoSuchFieldException, SecurityException, IllegalArgumentException,
 			IllegalAccessException, InvocationTargetException, NoSuchMethodException {
 	    Method getHandle = player.getClass().getMethod("getHandle");
@@ -53,7 +66,6 @@ public class CommandServerInfo extends LeopardCommand {
 	    Object ePlayer = ePlayerField.get(con);
 	    Field pingField = ePlayer.getClass().getField("ping");
 	    int ping = (int) pingField.get(ePlayer);
-	    //p.getHandle().playerConnection.player.ping;
 	    return ping;
 	}
 

@@ -26,7 +26,7 @@ public class Leopard extends JavaPlugin {
 	private PlayerAimRecorder aimRecorder;
 	private CommandManager commandManager;
 	private LocaleManager localeManager;
-
+	
 	public void onEnable() {
 		try {
 			DataFolderIniter folderIniter = new DataFolderIniter(this);
