@@ -5,15 +5,15 @@ import org.bukkit.command.CommandSender;
 import io.nova41.leopard.Leopard;
 import io.nova41.leopard.file.LocaleManager;
 
-public class CommandVersion extends LeopardCommand {
+public class CommandHelp extends LeopardCommand {
 
-	public CommandVersion(boolean isPlayerOnly) {
+	public CommandHelp(boolean isPlayerOnly) {
 		super(isPlayerOnly);
 	}
 
 	@Override
 	public void perform(Object fromPlugin, LocaleManager locale, CommandSender sender, String[] args) {
-		locale.sendMessage(sender, "leopard.command.version", Leopard.getVersion());
+		locale.sendMessage(sender, "leopard.command.help");
 	}
 
 }

@@ -38,7 +38,7 @@ public class CommandManager implements CommandExecutor {
 	 * @param executor
 	 */
 
-	public void setDefaultCommand(LeopardCommand executor) {
+	public void setUsageCommand(LeopardCommand executor) {
 		usageCommand = executor;
 	}
 
@@ -54,28 +54,34 @@ public class CommandManager implements CommandExecutor {
 		this.locales = locales;
 	}
 
+	public JavaPlugin getParentPlugin() {
+		return this.plugin;
+	}
+	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String str, String[] args) {
 		if (args.length == 0) {
-			if (usageCommand != null)
-				this.usageCommand.perform(locales, sender, args);
+			if (usageCommand != null) {
+				this.usageCommand.perform(plugin, locales, sender, args);
+				return true;
+			}
 		} else {
 			String subcommand = args[0];
 			if (commands.containsKey(subcommand.toLowerCase())) {
 				LeopardCommand executor = commands.get(subcommand.toLowerCase());
 				if (sender instanceof Player)
-					executor.perform(locales, sender, args);
+					executor.perform(plugin, locales, sender, args);
 				else if (executor.isPlayerOnly() == false)
-					executor.perform(locales, sender, args);
+					executor.perform(plugin, locales, sender, args);
 				else if (errorCommand != null)
-					errorCommand.perform(locales, sender, args);
+					errorCommand.perform(plugin, locales, sender, args);
 				else
 					return false;
 			}
 			return true;
 		}
 		if (usageCommand != null) {
-			usageCommand.perform(locales, sender, args);
+			usageCommand.perform(plugin, locales, sender, args);
 			return true;
 		}
 		return false;

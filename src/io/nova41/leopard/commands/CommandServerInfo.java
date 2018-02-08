@@ -17,7 +17,7 @@ public class CommandServerInfo extends LeopardCommand {
 	}
 
 	@Override
-	public void perform(LocaleManager locale, CommandSender sender, String[] args) {
+	public void perform(Object fromPlugin, LocaleManager locale, CommandSender sender, String[] args) {
 		try {
 			String server_version = locale.getPlugin().getServer().getVersion();
 			String averageTps = averageTps();

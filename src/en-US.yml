@@ -9,9 +9,13 @@ leopard.command.help: |
     &e/sl reload &fReload the whole plugin.
     &e/sl serverinfo &fGet information about the server.
     &e/sl version &fGet the version of current SnowLeopard build.
-leopard.command.version: '&aThe server is running SnowLeopard &e{0}'
+leopard.command.reload.before: '&eReloading the plugin...'
+leopard.command.reload.after: '&eSuccessfully reloaded the plugin.'
 leopard.command.serverinfo: |
     &aServer version: &e{0}
     &aServer TPS: &e{1}
     &aYour ping: &e{2}
-leopard.command.serverinfo.fail: '&cFailed to dump the information. Check the console for more details.'
+leopard.command.serverinfo-fail: '&cFailed to dump the information. Check the console for more details.'
+leopard.command.version: '&aThe server is running SnowLeopard &e{0}'
+leopard.command.error: '&cThis command can only executed by a player.'
+leopard.command.usage: '&cWrong usage. Do &e/sl help &cfor help.'
