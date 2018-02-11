@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.command.CommandSender;
 import org.bukkit.scheduler.BukkitTask;
 
 import io.nova41.leopard.Leopard;
@@ -32,10 +32,10 @@ public class CombatManager {
 		this.runningTasks = new HashMap<String, BukkitTask>();
 	}
 
-	public void addNewCategory(String category, String playername, int samplenum, long samples_period_length, boolean verbose) {
-		Player p = Bukkit.getPlayer(playername);
+	public void addNewCategory(String category, String fromPlayer, CommandSender callback, int samplenum,
+			long samples_period_length, boolean verboseOutput) {
 		long sample_interval = (long) (20 * samples_period_length);
-		this.collectedData.put(playername, new ArrayList<Dataset>());
+		this.collectedData.put(fromPlayer, new ArrayList<Dataset>());
 		BukkitTask task = Bukkit.getScheduler().runTaskTimer(plugin, new Runnable() {
 			int i = 0;
 			SequenceContainer container = new AimDataContainer();
@@ -43,31 +43,37 @@ public class CombatManager {
 			@Override
 			public void run() {
 				if (i > samplenum) {
-					recorder.stopListen(playername);
-					plugin.getLocales().sendMessage(p, "leopard.command.train.stop", i++, samplenum);
-					runningTasks.get(playername).cancel();
-					runningTasks.remove(playername);
-					if (verbose)
-						for (Dataset data : collectedData.get(playername)) {
-							System.out.println(Arrays.asList(data.data));
+					recorder.stopListen(fromPlayer);
+					plugin.getLocales().sendMessage(callback, "leopard.command.train.stop", i++, samplenum);
+					runningTasks.get(fromPlayer).cancel();
+					runningTasks.remove(fromPlayer);
+					if (verboseOutput)
+						for (Dataset data : collectedData.get(fromPlayer)) {
+							System.out.println("Final vector: " + Arrays.asList(data.data));
 						}
+					saveSample(category, fromPlayer, callback);
 					return;
 				}
-				if (recorder.getData(playername) != null) {
-					Dataset collected_sample = recorder.getData(playername).toVector(category);
-					collectedData.get(playername).add(collected_sample);
+				if (recorder.getData(fromPlayer) != null) {
+					Dataset collected_sample = recorder.getData(fromPlayer).toVector(category);
+					collectedData.get(fromPlayer).add(collected_sample);
 				}
 				container.clear();
 				// new process starts here...
-				recorder.setListen(playername, container);
-				plugin.getLocales().sendMessage(p, "leopard.command.train.recording", i++, samplenum);
+				recorder.setListen(fromPlayer, container);
+				plugin.getLocales().sendMessage(callback, "leopard.command.train.recording", i++, samplenum);
 			}
 		}, 0, sample_interval);
-		this.runningTasks.put(playername, task);
+		this.runningTasks.put(fromPlayer, task);
 	}
 
 	public boolean isPlayerAvailable(String playername) {
 		return !this.recorder.getListeningPlayers().contains(playername);
 	}
 
+	private void saveSample(String category, String playername, CommandSender callback) {
+		plugin.getLocales().sendMessage(callback, "leopard.command.train.saving", category);
+		
+		plugin.getLocales().sendMessage(callback, "leopard.command.train.saved", category);
+	}
 }
