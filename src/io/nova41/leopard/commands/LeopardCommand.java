@@ -1,7 +1,6 @@
 package io.nova41.leopard.commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import io.nova41.leopard.file.LocaleManager;
 
