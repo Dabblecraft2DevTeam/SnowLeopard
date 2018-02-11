@@ -12,8 +12,9 @@ Welcome to contribute to the project! You can provide improvements by [making a 
   - Low coupling: Open Interface for Developers
   - Categorized datasets for data analysis
   - Serializable datasets adapted SnakeYAML
-  - Built-in Banwave system
-  - Built-in Report system
+  - Built-in Train & Check System
+  - Built-in Banwave system [IN-PROCESS]
+  - Built-in Report system [IN-PROCESS]
   - Detailed analysis result includes probability of estimation
   - Your contribution
 
