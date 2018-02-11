@@ -1,0 +1,33 @@
+# This is the configuration file of SnowLeopard.
+# For detailed documentation for variables here please check out
+# https://github.com/Nova41/SnowLeopard
+#
+# For bugs or suggestions:
+# https://github.com/Nova41/SnowLeopard/issues
+
+sample:
+    # A new category should be sampled how many times
+    number-of-samples: 6
+    
+    # The period of every sample, in seconds
+    interval: 6
+    
+check:
+    # The minimum length of the time to categorize
+    min-check-time: 8000
+
+banwave:
+    # How many players should be analyzed at one time
+    # Leave 0 for all online players
+    maximum-random-analyzes: 20
+    
+network:
+    # The network will constantly fit itself until the delta of epoch is lower than
+    max-epoch-delta: 1E-10
+    
+    # Inital steps and the decay rate of the steps
+    init-step: 0.5
+    step-del-rate: 0.95
+    
+    # Whether the verbose output should be enabled
+    verbose-output: true
