@@ -2,6 +2,7 @@ name: SnowLeopard
 main: io.nova41.leopard.Leopard
 version: 1.0.0
 author: Nova41
+depend: [ProtocolLib]
 commands:
     sl:
         description: Leopard's basic command.
