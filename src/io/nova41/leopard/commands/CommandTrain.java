@@ -31,7 +31,7 @@ public class CommandTrain extends LeopardCommand {
 			locale.sendMessage(sender, "leopard.command.train.player-unavailable");
 			return;
 		}
-		combatManager.addNewCategory(category, playername, plugin.samples_number_of_samples, plugin.samples_interval, plugin.nn_verbose);
+		combatManager.addNewCategory(category, playername, sender, plugin.samples_number_of_samples, plugin.samples_interval, plugin.nn_verbose);
 	}
 
 }
