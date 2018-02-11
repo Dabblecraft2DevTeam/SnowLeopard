@@ -17,8 +17,8 @@ public class Dataset implements Cloneable, ConfigurationSerializable {
 	 * 
 	 */
 
-	String category;
-	Double[] data;
+	public String category;
+	public Double[] data;
 
 	public Dataset(String category, Double[] data) {
 		this.category = category;
