@@ -51,8 +51,7 @@ public class Leopard extends JavaPlugin {
 	public Boolean				nn_verbose;
 
 	public void onEnable() {
-		if (this.getConfig() == null)
-			this.saveDefaultConfig();
+		this.saveDefaultConfig();
 		this.reloadConfig();
 		this.samples_number_of_samples =	this.getConfig().getInt("sample.number-of-samples");
 		this.samples_interval =				this.getConfig().getLong("sample.interval");

@@ -58,7 +58,7 @@ public class LVQNeuronNetwork {
 	 */
 	public LVQNeuronNetwork(int features, double step_alpha, double step_alpha_del_rate) {
 		this.input_layer = new ArrayList<Dataset>();
-		this.output_layer = new ArrayList<Dataset>();
+		this.output_layer = new ArrayList <Dataset>();
 		this.distances = new HashMap<Double, Dataset>();
 		this.input_features = features;
 		this.step_alpha = step_alpha;

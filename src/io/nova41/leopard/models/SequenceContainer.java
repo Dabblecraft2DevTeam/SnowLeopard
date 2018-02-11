@@ -1,6 +1,5 @@
 package io.nova41.leopard.models;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,16 +9,13 @@ import org.bukkit.entity.Player;
 public abstract class SequenceContainer {
 
 	protected final Double[] emptyVector = new Double[] {};
-	protected List<Float> angleSequence;
-
-	public SequenceContainer() {
-		angleSequence = new ArrayList<Float>();
-	}
 
 	public abstract Dataset toVector(String category);
 
 	public abstract void input(Player player, Entity enemy, boolean verboseOutput);
 
+	public abstract void clear();
+	
 	protected double mean(List<Float> list) {
 		double sum = 0;
 		Iterator<Float> iter = list.iterator();
@@ -36,4 +32,5 @@ public abstract class SequenceContainer {
 			devsum += Math.pow(iter.next() - mean, 2);
 		return devsum / list.size();
 	}
+	
 }

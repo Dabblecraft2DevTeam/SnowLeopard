@@ -19,3 +19,8 @@ leopard.command.serverinfo-fail: '&cFailed to dump the information. Check the co
 leopard.command.version: '&aThe server is running SnowLeopard &e{0}'
 leopard.command.error: '&cThis command can only executed by a player.'
 leopard.command.usage: '&cWrong usage. Do &e/sl help &cfor help.'
+leopard.command.train.player-offline: '&cPlayer is offline!'
+leopard.command.train.player-unavailable: '&cThis player is currently in a training or analyzing process. Please try again later.'
+leopard.command.train.begin: '&eAttempt to train new category...'
+leopard.command.train.recording: '&eSampling features ({0}/{1})'
+leopard.command.train.stop: '&eFinished sampling'

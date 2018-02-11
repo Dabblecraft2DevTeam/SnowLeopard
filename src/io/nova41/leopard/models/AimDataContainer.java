@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class AimDataContainer extends SequenceContainer {
 
-	protected List<Float> deltaSequence;
+	private List<Float> angleSequence;
+	private List<Float> deltaSequence;
 
 	public AimDataContainer() {
-		super();
+		this.angleSequence = new ArrayList<Float>();
 		this.deltaSequence = new ArrayList<Float>();
 	}
 
@@ -44,7 +46,18 @@ public class AimDataContainer extends SequenceContainer {
 			this.deltaSequence.add(Math.abs(angle - angleSequence.get(angleSequence.size() - 1)));
 		}
 		this.angleSequence.add(angle);
-		System.out.println("Current hit angle: " + angle);
+		if (verboseOutput) {
+			Bukkit.getLogger()
+					.info("[SnowLeopard Clickdetector] DetectedClick{damager=" + player.getName() + ",entity=" + enemy.getName() + ",entityID="
+							+ enemy.getEntityId() + ",damager_loc=" + player.getLocation() + ",entity_loc="
+							+ enemy.getLocation() + ",ANGLE_abs=" + angle + "}");
+		}
+	}
+
+	@Override
+	public void clear() {
+		this.angleSequence.clear();
+		this.deltaSequence.clear();
 	}
 
 }
